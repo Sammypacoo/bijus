@@ -1,88 +1,38 @@
-var menina,meninaimage
-var background1,backgroundimage
-var axeGroup,policeGroup,zombieGroup;
-
+var ground,groundImage
+var nave,naveImg
 
  function preload(){
-    meninaimage=loadImage("m.png")
-    backgroundimage=loadImage("floresta.png")
-    axeImg=loadImage("axe.png")
-    policeImg=loadImage("police.png")
-    zombieImg=loadImage("zombie2.png")
+    groundImage=loadImage("b2.jpg")
+    naveImg=loadAnimation("sprite_00.png","sprite_01.png","sprite_02.png",
+    "sprite_03.png","sprite_04.png","sprite_05.png","sprite_06.png","sprite_07.png",
+    "sprite_08.png","sprite_09.png","sprite_10.png")
 
+    //naveSpritedata = loadJSON("Imagens\protagonista\protagonista.json.json");
+    //naveSpritesheet = loadImage("Imagens\protagonista\spritesheet.png");
 }
 
 function setup() {
-    createCanvas(1200,600)
-    background("black")
-    axeGroup= new Group();
-    policeGroup= new Group();
-    zombieGroup= new Group();
-    background1=createSprite(0,0,1200,600);
-    background1.addImage("B",backgroundimage)
-    background1.scale=1.3 
-    background1.velocityX = -5
-
-    menina=createSprite(120,450,20,50);
-    menina.addImage("M",meninaimage)
-    menina.scale=0.1
-
-
-
+    createCanvas(600, 300);  
+    ground = createSprite(200,180,400,20);
+    ground.addImage("ground",groundImage);
+    ground.x = ground.width /2;
+    ground.velocityX=-3
+    ground.scale=1
+    
+     
+    nave = createSprite(50,180,20,50);
+    nave.addAnimation("teste",naveImg);
+    nave.scale=1
 
 }
 
 function draw() {
-    if (background1.x < 0){ 
-       background1.x = background1.width/2; 
-    }
-    var rand = Math.round(random(1,3));
-    
-    switch(rand) {
-      case 1: createAxes()
-              break;
-      case 2: createpolice()
-              break;
-      case 3: createzombie() ;
-              break;
-      default: break;
 
+    if (ground.x < 0){
+        ground.x = ground.width/2;
     }
+    
+
     drawSprites()
-    
  
-}
- 
-function createAxes() { 
-    if (frameCount % 100 === 0) {
-        var axe = createSprite(700,450,10,40);
-        axe.addImage(axeImg);
-        axe.scale=0.15;
-        axe.velocityX = -5;
-        axe.lifetime = 200; 
-        axeGroup.add(axe); 
-    }
-}
-
-
-
-function createpolice() { 
-    if (frameCount % 100 === 0) {
-        var police = createSprite(700,450,10,40);
-        police.addImage(policeImg);
-        police.scale=0.3;
-        police.velocityX = -5;
-        police.lifetime = 200; 
-        policeGroup.add(police); 
-    }
-}
-function createzombie() { 
-        if (frameCount % 100 === 0) {
-            var zombie = createSprite(700,450,10,40);
-            zombie.addImage(zombieImg);
-            zombie.scale=0.10;
-            zombie.velocityX = -5;
-            zombie.lifetime = 200; 
-            zombieGroup.add(zombie); 
-        }
 }
